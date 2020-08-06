@@ -13,5 +13,4 @@ public interface UsuarioRepository extends CrudRepository<UsuarioJpa, Long>{
 	
 	UsuarioJpa findByUserAndPassword(String user, String password);
 
-
 }

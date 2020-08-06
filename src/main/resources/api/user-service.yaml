@@ -1,0 +1,296 @@
+swagger: '2.0'
+info:
+    title: user-service.yaml
+    version: 1.0.0
+paths:
+    /user/usuarios:
+        get:
+            tags:
+                - Usuarios
+            responses:
+                '200':
+                    description: Operacion correcta
+                    schema:
+                        $ref: '#/definitions/usuarios'
+                '400':
+                    description: Datos de entrada incorrectos
+                    schema:
+                        $ref: '#/definitions/usuarios'
+        post:
+            tags:
+                - Usuarios
+            parameters:
+                -
+                    name: body
+                    schema:
+                        $ref: '#/definitions/usuario'
+                    in: body
+                    required: true
+            responses:
+                '200':
+                    description: Operacion correcta
+                    schema:
+                        $ref: '#/definitions/usuarios'
+                '400':
+                    description: Datos de entrada incorrectos
+                    schema:
+                        $ref: '#/definitions/usuarios'
+    /user/roles:
+        get:
+            tags:
+                - Roles
+            responses:
+                '200':
+                    description: Operacion correcta
+                    schema:
+                        $ref: '#/definitions/roles'
+                '400':
+                    description: Datos de entrada incorrectos
+                    schema:
+                        $ref: '#/definitions/roles'
+        post:
+            tags:
+                - Roles
+            parameters:
+                -
+                    name: body
+                    schema:
+                        $ref: '#/definitions/rol'
+                    in: body
+                    required: true
+            responses:
+                '200':
+                    description: Operacion correcta
+                    schema:
+                        $ref: '#/definitions/roles'
+                '400':
+                    description: Datos de entrada incorrectos
+                    schema:
+                        $ref: '#/definitions/roles'
+    '/user/roles/{rolid}':
+        get:
+            tags:
+                - Roles
+            responses:
+                '200':
+                    description: Operacion correcta
+                    schema:
+                        $ref: '#/definitions/roles'
+                '400':
+                    description: Datos de entrada incorrectos
+                    schema:
+                        $ref: '#/definitions/roles'
+        delete:
+            tags:
+                - Roles
+            responses:
+                '200':
+                    description: Operacion correcta
+                    schema:
+                        $ref: '#/definitions/resultado'
+                '400':
+                    description: Datos de entrada incorrecta
+                    schema:
+                        $ref: '#/definitions/resultado'
+        parameters:
+            -
+                name: rolid
+                description: Identificador del rol
+                in: path
+                required: true
+                type: string
+    '/user/usuarios/{usuarioid}':
+        get:
+            tags:
+                - Usuarios
+            responses:
+                '200':
+                    description: Operacion correcta
+                    schema:
+                        $ref: '#/definitions/usuarios'
+                '400':
+                    description: Datos de entrada incorrectos
+                    schema:
+                        $ref: '#/definitions/usuarios'
+        delete:
+            tags:
+                - Usuarios
+            responses:
+                '200':
+                    description: Operacion correcta
+                    schema:
+                        $ref: '#/definitions/usuarios'
+                '400':
+                    description: Datos de entrada incorrectos
+                    schema:
+                        $ref: '#/definitions/usuarios'
+        parameters:
+            -
+                name: usuarioid
+                description: Identificador del usuario
+                in: path
+                required: true
+                type: string
+    /user/personas:
+        get:
+            tags:
+                - Personas
+            responses:
+                '200':
+                    description: Operacion correcta
+                    schema:
+                        $ref: '#/definitions/personas'
+                '400':
+                    description: Datos de entrada incorrectos
+                    schema:
+                        $ref: '#/definitions/personas'
+    '/user/personas/{personaid}':
+        get:
+            tags:
+                - Personas
+            responses:
+                '200':
+                    description: Operacion correcta
+                    schema:
+                        $ref: '#/definitions/personas'
+                '400':
+                    description: Datos de entrada incorrectos
+                    schema:
+                        $ref: '#/definitions/personas'
+        delete:
+            tags:
+                - Personas
+            responses:
+                '200':
+                    description: Operacion correcta
+                    schema:
+                        $ref: '#/definitions/resultado'
+                '400':
+                    description: Datos de entrada incorrectos
+                    schema:
+                        $ref: '#/definitions/resultado'
+        parameters:
+            -
+                name: personaid
+                description: Identificador de la persona
+                in: path
+                required: true
+                type: string
+    '/user/usuarios/validarusuario/user/{user}/password/{password}':
+        get:
+            tags:
+                - Usuarios
+            responses:
+                '200':
+                    description: Operacion correcta
+                    schema:
+                        $ref: '#/definitions/usuarios'
+                '400':
+                    description: Datos de entrada incorrectos
+                    schema:
+                        $ref: '#/definitions/usuarios'
+        parameters:
+            -
+                name: user
+                description: Usuario de la persona
+                in: path
+                required: true
+                type: string
+            -
+                name: password
+                description: Password de la persona
+                in: path
+                required: true
+                type: string
+definitions:
+    usuario:
+        description: ''
+        type: object
+        properties:
+            id:
+                description: Identificador del usuario
+                type: string
+            user:
+                description: Usuario de la persona
+                type: string
+            password:
+                description: Password de la persona
+                type: string
+            persona:
+                $ref: '#/definitions/persona'
+                description: Persona del usuario
+            rol:
+                $ref: '#/definitions/rol'
+                description: Rol del usuario
+    usuarios:
+        description: ''
+        type: object
+        properties:
+            resultado:
+                $ref: '#/definitions/resultado'
+                description: Resultado de la operacion
+            usuario:
+                description: Lista de usuarios
+                type: array
+                items:
+                    $ref: '#/definitions/usuario'
+    persona:
+        description: ''
+        type: object
+        properties:
+            nombre:
+                description: Nombre de la perona
+                type: string
+            apellido:
+                description: Apellido de la persona
+                type: string
+            id:
+                description: Identificador de la persona
+                type: string
+            correo:
+                description: Correo de la persona
+                type: string
+    personas:
+        description: ''
+        type: object
+        properties:
+            resultado:
+                $ref: '#/definitions/resultado'
+                description: Resultado de la operacion
+            persona:
+                description: Lista de personas
+                type: array
+                items:
+                    $ref: '#/definitions/persona'
+    resultado:
+        description: ''
+        type: object
+        properties:
+            codigoRespuesta:
+                description: Codigo de respuesta
+                type: string
+            mensajeRespuesta:
+                description: Mensaje de respuesta
+                type: string
+    rol:
+        description: ''
+        type: object
+        properties:
+            id:
+                description: Identificador del rol
+                type: string
+            rol:
+                description: Nombre del rol
+                type: string
+    roles:
+        description: ''
+        type: object
+        properties:
+            resultado:
+                $ref: '#/definitions/resultado'
+                description: Resultado de la operacion
+            rol:
+                description: Lista de roles
+                type: array
+                items:
+                    $ref: '#/definitions/rol'
